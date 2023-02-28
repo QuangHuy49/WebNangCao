@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 using TatBlog.Core.Entities;
 using TatBlog.Data.Contexts;
 using TatBlog.Core.DTO;
+using TatBlog.Core.Contracts;
+using System.ComponentModel;
+using TatBlog.Data.Mappings;
 
 namespace TatBlog.Services.Blogs;
 
@@ -85,5 +88,21 @@ public class BlogRepository : IBlogRepository
 				ShowOnMenu = x.ShowOnMenu,
 				PostCount = x.Posts.Count(p => p.Published)
 			}).ToListAsync(cancellationToken);
+	}
+	//Lấy danh sách từ khóa và phân trang theo các tham số pagingParams
+	public async Task<IPagedList<TagItem>> GetPagedTagsAsync(
+		IPagingParams pagingParams,
+		CancellationToken cancellationToken = default)
+	{
+		var tagQuery = _context.Set<Tag>()
+			.Select(x => new TagItem()
+			{
+				Id = x.Id,
+				Name = x.Name,
+				Description = x.Description,
+				PostCount = x.Posts.Count(p => p.Published)
+			});
+		return await tagQuery
+			.ToPagedListAsync(pagingParams, cancellationToken);
 	}
 }
