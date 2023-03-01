@@ -38,4 +38,4 @@ public interface IPagedList<out T> : IPagedList, IEnumerable<T>
 	T this[int index] { get; }
 	//Đếm số lượng phần tử chứa trong trang
 	int Count { get; }
-}	
+}

@@ -10,6 +10,7 @@ using TatBlog.Core.DTO;
 using TatBlog.Core.Contracts;
 using System.ComponentModel;
 using TatBlog.Data.Mappings;
+using TatBlog.Services.Extensions;
 
 namespace TatBlog.Services.Blogs;
 

@@ -37,11 +37,11 @@ foreach (var post in posts)
 	Console.WriteLine("Author     : {0}", post.Author);
 	Console.WriteLine("Category   : {0}", post.Category);
 	Console.WriteLine("".PadRight(80, '-'));
-}	*/
+}*/
 
 IBlogRepository blogRepo = new BlogRepository(context);
 var posts = await blogRepo.GetPopularArticlesAsync(3);
-foreach(var post in posts)
+foreach (var post in posts)
 {
 	Console.WriteLine("ID         : {0}", post.Id);
 	Console.WriteLine("Title      : {0}", post.Title);
@@ -70,8 +70,8 @@ var pagingParams = new PagingParams
 };
 //Lấy danh sách từ khóa
 var tagsList = await blogRepo.GetPagedTagsAsync(pagingParams);
-Console.WriteLine("{0,5}{1,-50}{2,10}", "ID", "Name", "Count");
+Console.WriteLine("{0,-5} {1,-50} {2,10}", "ID", "Name", "Count");
 foreach (var item in tagsList)
 {
-	Console.WriteLine("{0,5}{1,-50}{2,10}", item.Id, item.Name, item.PostCount);
-}	
+	Console.WriteLine("{0,-5} {1,-50} {2,10}", item.Id, item.Name, item.PostCount);
+}

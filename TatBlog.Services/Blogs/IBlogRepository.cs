@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TatBlog.Core.Entities;
 using TatBlog.Core.DTO;
+using TatBlog.Core.Contracts;
 
 namespace TatBlog.Services.Blogs;
 
@@ -25,4 +26,6 @@ public interface IBlogRepository
 	//Lấy danh sách chuyên mục và số lượng bài viết thuộc từng chuyên mục
 	Task<IList<CategoryItem>> GetCategoryAsync(bool showOnMenu = false,
 		CancellationToken cancellationToken = default);
+	Task<IPagedList<TagItem>> GetPagedTagsAsync (
+		IPagingParams pagingParams, CancellationToken cancellationToken = default);
 }

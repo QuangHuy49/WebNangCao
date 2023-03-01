@@ -27,11 +27,12 @@ public class PagedList<T> : IPagedList<T>
 		get => PageIndex + 1;
 		set => PageIndex = value - 1;
 	}
-	public int PageCount
+	public int PagedCount
 	{
 		get
 		{
-			if (PageSize == 0) return 0;
+			if (PageSize == 0) 
+				return 0;
 			var total = TotalItemCount / PageSize;
 			if (TotalItemCount % PageSize > 0)
 				total++;
@@ -40,11 +41,11 @@ public class PagedList<T> : IPagedList<T>
 
 	}
 	public bool HasPreviousPage => PageIndex > 0;
-	public bool HasNextPage => (PageIndex < (PageCount - 1));
+	public bool HasNextPage => (PageIndex < (PagedCount - 1));
 	public int FirstItemIndex => (PageIndex * PageSize) + 1;
 	public int LastItemIndex => Math.Min(TotalItemCount, ((PageIndex * PageSize) + PageSize));
 	public bool IsFirstPage => (PageIndex <= 0);
-	public bool IsLastPage => (PageIndex >= (PageCount - 1));
+	public bool IsLastPage => (PageIndex >= (PagedCount - 1));
 
 	#region IPagedList<T> Members
 	public IEnumerator<T> GetEnumerator()
